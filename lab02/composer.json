@@ -1,0 +1,9 @@
+{
+    "name" : "isc/free45",
+    "description" :"etc",
+    "license": "MIT",
+    "required": {},
+    "outload":{
+        "files":["config.php","validation.php"]
+    }
+}
