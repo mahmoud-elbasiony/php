@@ -3,7 +3,7 @@
 require("vendor/autoload.php");
 require_once("views/form.php");
 use Aws\S3\S3Client;
-//var_dump($_FILES);
+// var_dump($_FILES);
 if(isset($_FILES["fileToUpload"])){
     if($_FILES["fileToUpload"]["size"]>300000){
         die( "<h3>File size is too big.</h3>");
