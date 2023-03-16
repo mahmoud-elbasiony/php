@@ -31,7 +31,7 @@
                 // var_dump($items_count);
                 // var_dump($page_number);
 
-                $items=get_items_paginated("items",$page_number);
+                $items=json_decode(json_encode(get_items_paginated("items",$page_number*__RECORDS_PER_PAGE__)),true);
                 // var_dump($items);
                 foreach($items as $item){
                     echo "<tr><td scope='col'>{$item["id"]}</td>";
@@ -48,7 +48,7 @@
             <li class="page-item"><a class="page-link" href="<?php echo $_SERVER["PHP_SELF"]."?page=items&page_number=".$prev;?>">Previous</a></li>
             <?php 
             for($i=0 ;$i<intval($items_count/__RECORDS_PER_PAGE__)+1;$i++){
-                echo "<li class='page-item'><a class='page-link' href=".$_SERVER["PHP_SELF"]."?page=items&page_number=".$i*__RECORDS_PER_PAGE__.">".$i+1.;"</a></li>";
+                echo "<li class='page-item'><a class='page-link' href=".$_SERVER["PHP_SELF"]."?page=items&page_number=".$i.">".$i+1.;"</a></li>";
             }
             ?>
             <li class="page-item"><a class="page-link" href="<?php echo $_SERVER["PHP_SELF"]."?page=items&page_number=".$next;?>">Next</a></li>

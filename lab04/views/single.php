@@ -10,14 +10,11 @@
 </head>
 <body>
     <div class="container">
-
         <?php $item=get_items_by_id("items",$item_id)[0]; ?>
-
         <div class="card bg-light pd-2 col" style="width: 18rem; margin:50px auto;">
             <img src="<?php echo "assets/images/".$item["photo"]; ?>" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
                 <h5 class="card-title text-center"><?php echo $item["product_name"];?></h5>
-                <!-- <p class="card-text"><?php echo "Code: ".$item["product_code"];?></p> -->
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item bg-light"><?php echo "Code: ".$item["product_code"];?></li>
@@ -26,8 +23,6 @@
                 <li class="list-group-item bg-light"><?php echo "Price: ".$item["list_price"]; ?></li>
             </ul>
         </div>
-
-
     </div>
 </body>
 </html>
