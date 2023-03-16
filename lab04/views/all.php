@@ -13,12 +13,14 @@
     
 
     <div class="container">
-    <table class="table">
+    <table class="table table-striped table-dark">
         <thead>
             <tr>
                 <th scope='col'>Id</th>   
                 <th scope='col'>Name</th>   
+                <th scope='col'>image</th>  
                 <th scope='col'>desc</th>   
+
             </tr>
         </thead>
         <tbody>
@@ -29,11 +31,12 @@
                 // var_dump($items_count);
                 // var_dump($page_number);
 
-                $items=get_items_paginated($page_number);
+                $items=get_items_paginated("items",$page_number);
                 // var_dump($items);
                 foreach($items as $item){
                     echo "<tr><td scope='col'>{$item["id"]}</td>";
                     echo "<td scope='col'>{$item["product_name"]}</td>";
+                    echo "<td scope='col'><img src='assets/images/".str_replace(".","tz.",$item["photo"])."' class='card-img-top' alt='...' style='max-width:40px;'></td>";
                     echo "<td scope='col'><a href='".$_SERVER["PHP_SELF"]."?page=items&id=".$item["id"]."'>show more</a></td></tr>";
                 }
                 ?>

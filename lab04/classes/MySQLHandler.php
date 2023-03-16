@@ -135,7 +135,6 @@ class MySQLHandler {
 
         $sql .= "where `" . $primary_key . "` = $id";
         $sql = str_replace(",where", "where", $sql);
- 
         if (mysqli_query($this->_db_handler, $sql)) {
             $this->disconnect();
             return true;

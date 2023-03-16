@@ -11,7 +11,7 @@
 <body>
     <div class="container">
 
-        <?php $item=get_items_by_id($item_id)[0]; ?>
+        <?php $item=get_items_by_id("items",$item_id)[0]; ?>
 
         <div class="card bg-light pd-2 col" style="width: 18rem; margin:50px auto;">
             <img src="<?php echo "assets/images/".$item["photo"]; ?>" class="card-img-top img-fluid" alt="...">

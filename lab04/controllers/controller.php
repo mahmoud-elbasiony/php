@@ -3,10 +3,10 @@
 function return_response($data,$status_code){
     header("Content-Type: application/json");
     http_response_code($status_code);
-    echo(json_encode($data));
+    echo json_encode($data);
 }
 
-function get_items_by_id($id=""){
+function get_items_by_id($table,$id=""){
     try{
         
         $sql_handler=new MySQLHandler("items");
@@ -15,10 +15,11 @@ function get_items_by_id($id=""){
         return $result;
     }catch(Exception  $err){
         $err=["error"=>_MYSQL_SERVER_ERROR_];
-        return return_response($err,500);
+        return_response($err,500);
+        exit();
     } 
 }
-function get_items_paginated($start=0){
+function get_items_paginated($table,$start=0){
     try{
 
         $sql_handler=new MySQLHandler("items");
@@ -26,22 +27,24 @@ function get_items_paginated($start=0){
         return $result;
     }catch(Exception  $err){
         $err=["error"=>_MYSQL_SERVER_ERROR_];
-        return return_response($err,500);
+        return_response($err,500);
+        exit();
     } 
 }
 
-function delete_items_by_id($id=""){
+function delete_items_by_id($table,$id=""){
     try{
         $sql_handler=new MySQLHandler("products");
         $result=$sql_handler->delete($id);
         return $result;
     }catch(Exception  $err){
         $err=["error"=>_MYSQL_SERVER_ERROR_];
-        return return_response($err,500);
+        return_response($err,500);
+        exit();
     } 
 }
 
-function save_product(){
+function save_product($table){
     $fields=["name","price","units_in_stock"];
     $data = json_decode(file_get_contents('php://input'), true);
     foreach($fields as $field){
@@ -57,11 +60,12 @@ function save_product(){
         }
     }catch(Exception  $er){
         $err=["error"=> _MYSQL_SERVER_ERROR_];
-        return return_response($err,500);
+        return_response($err,500);
+        exit();
     }
 }
 
-function update_product($id){
+function update_product($table,$id){
     $fields=["name","price","units_in_stock"];
     $data = json_decode(file_get_contents('php://input'), true);
     try{
@@ -74,6 +78,19 @@ function update_product($id){
     }
     }catch(Exception  $er){
         $err=["error"=> _MYSQL_SERVER_ERROR_];
-        return return_response($err,500);
+        return_response($err,500);
+        exit();
     }
+}
+
+function get_rows_count($table){
+    try{
+        $db=new MySQLHandler($table);
+        return $db->count_rows();
+    }catch(Exception  $er){
+        $err=["error"=> _MYSQL_SERVER_ERROR_];
+        return_response($err,500);
+        exit();
+    }
+
 }
