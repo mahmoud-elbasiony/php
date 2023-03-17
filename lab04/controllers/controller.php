@@ -1,9 +1,10 @@
 <?php
 
 function return_response($data,$status_code){
-    header("Content-Type: application/json");
+    // header("Content-Type: application/json");
+    header("Content-Type: text/html");
     http_response_code($status_code);
-    echo json_encode($data);
+    echo "<h2>".$data."</h2>";
 }
 
 function get_items_by_id($table,$id=""){
@@ -14,7 +15,7 @@ function get_items_by_id($table,$id=""){
         
         return $result;
     }catch(Exception  $err){
-        $err=["error"=>_MYSQL_SERVER_ERROR_];
+        $err=_MYSQL_SERVER_ERROR_;
         return_response($err,500);
         exit();
     } 
@@ -26,7 +27,7 @@ function get_items_paginated($table,$start=0){
         $result=$sql_handler->get_data(array(),$start);
         return $result;
     }catch(Exception  $err){
-        $err=["error"=>_MYSQL_SERVER_ERROR_];
+        $err=_MYSQL_SERVER_ERROR_;
         return_response($err,500);
         exit();
     } 
@@ -38,7 +39,7 @@ function delete_items_by_id($table,$id=""){
         $result=$sql_handler->delete($id);
         return $result;
     }catch(Exception  $err){
-        $err=["error"=>_MYSQL_SERVER_ERROR_];
+        $err=_MYSQL_SERVER_ERROR_;
         return_response($err,500);
         exit();
     } 
@@ -59,7 +60,7 @@ function save_product($table){
             return $result;
         }
     }catch(Exception  $er){
-        $err=["error"=> _MYSQL_SERVER_ERROR_];
+        $err=_MYSQL_SERVER_ERROR_;
         return_response($err,500);
         exit();
     }
@@ -77,7 +78,7 @@ function update_product($table,$id){
         return return_response($err,404);
     }
     }catch(Exception  $er){
-        $err=["error"=> _MYSQL_SERVER_ERROR_];
+        $err=_MYSQL_SERVER_ERROR_;
         return_response($err,500);
         exit();
     }
@@ -88,7 +89,7 @@ function get_rows_count($table){
         $db=new MySQLHandler($table);
         return $db->count_rows();
     }catch(Exception  $er){
-        $err=["error"=> _MYSQL_SERVER_ERROR_];
+        $err= _MYSQL_SERVER_ERROR_;
         return_response($err,500);
         exit();
     }
